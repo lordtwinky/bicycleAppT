@@ -1,0 +1,44 @@
+<% if signed_in?%>
+	<%= form_for(@rent) do |f| %>
+	<% if @rent.errors.any? %>
+		<div id="error_explanation">
+		<h2><%= pluralize(@rent.errors.count, "error") %> prohibited this rent from being saved:</h2>
+
+		<ul>
+		<% @rent.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+      <% end %>
+		</ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <% if signed_in? and !admin? %>
+	<%= f.label :customer_id, 'Your Customer ID' %><br>
+	<%= f.text_field :customer_id, :value =>  @current_customer.id ,:readonly => true%>
+  <%else %>
+		<%= f.label :customer_id, 'Customer ID' %><br>
+		<%= f.text_field :customer_id%>
+  <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :bicycle_id, 'Bicycle model' %><br>
+	<%= f.collection_select :bicycle_id, Bicycle.all, :id, :modelName %>
+  </div>
+  <div class="field">
+    <%= f.label :numOfDays %><br>
+    <%= f.number_field :numOfDays %>
+  </div>
+  <div class="field">
+    <%= f.label :dateOfRent %><br>
+    <%= f.date_select :dateOfRent %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<%else%>
+	<h1>You must be logged on to visit this page</h1>
+		<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
+		<p>Already a member? <%= link_to "Sign in", login_path %></p>
+<% end %>

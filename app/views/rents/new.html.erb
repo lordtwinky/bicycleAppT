@@ -1,0 +1,15 @@
+<% if admin?%>
+<h1> As the admin, you are not allowed to visit this page. </h1>
+<%else if signed_in?%>
+<h1>New rent</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', rents_path %>
+<% else %>
+<h1>You must be logged on to visit this page</h1>
+		<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
+		<p>Already a member? <%= link_to "Sign in", login_path %></p>
+<%end%>
+<%end%>
+

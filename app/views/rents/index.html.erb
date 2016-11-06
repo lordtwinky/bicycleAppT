@@ -1,0 +1,69 @@
+<%if admin? %>
+<table>
+  <thead>
+    <tr>
+	  <th>Customer</th>
+      <th>Bicycle</th>
+      <th>Number of days</th>
+      <th>Date of rent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+	<h1>Listing all rents made by all customers</h1>
+	<% if @rents.empty? %>
+	No rents have been made in the database.
+	<%else %>
+		<% @rents.each do |rent| %>
+			<tr>
+				<td><%= rent.customer.userName %></td>
+				<td><%= rent.bicycle.modelName %></td>
+				<td><%= rent.numOfDays %></td>
+				<td><%= rent.dateOfRent %></td>
+				<td><%= link_to 'Show', rent %></td>
+				<td><%= link_to 'Edit', edit_rent_path(rent) %></td>
+				<td><%= link_to 'Destroy', rent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<% end %>
+			</tr>
+	<% end%>
+    <% end %>
+  </tbody>
+</table>
+
+<% else if signed_in? and !admin?%>
+<table>
+  <thead>
+    <tr>
+      <th>Bicycle</th>
+	  <th>Number of days</th>
+      <th>Date of rent</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+	<h1>Listing rents made by: <%= @current_customer.userName %></h1>
+    <% @rents.each do |rent| %>
+      <tr>
+		<% if rent.customer_id == @current_customer.id %>
+			<td><%= rent.bicycle.modelName %></td>
+			<td><%= rent.numOfDays %></td>
+			<td><%= rent.dateOfRent %></td>
+			<td><%= link_to 'Show', rent %></td>
+		<% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rent', new_rent_path %>
+
+<% else if !signed_in? and !admin? %>
+		<h1>You must be logged on to visit this page</h1>
+		<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
+		<p>Already a member? <%= link_to "Sign in", login_path %></p>
+<%end%>
+<%end%>

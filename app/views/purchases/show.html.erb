@@ -1,0 +1,30 @@
+<% if !signed_in? %>
+		<h1>You must be logged on to visit this page</h1>
+		<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
+		<p>Already a member? <%= link_to "Sign in", login_path %></p>
+<% else %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @purchase.customer.userName %>
+</p>
+
+<p>
+  <strong>Bicycle:</strong>
+  <%= @purchase.bicycle.modelName %>
+</p>
+
+<p>
+  <strong>Date of purchase:</strong>
+  <%= @purchase.dateOfPurchase %>
+</p>
+
+<% if admin? %>
+	<%= link_to 'Edit', edit_purchase_path(@purchase) %>
+	<%= link_to 'Destroy', @purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%end%>
+	<%= link_to 'Back', purchases_path %>
+<%end%>
+

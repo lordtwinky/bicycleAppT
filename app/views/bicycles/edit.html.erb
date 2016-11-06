@@ -1,0 +1,11 @@
+<%if admin? %>
+<h1>Editing bicycle</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', bicycles_path %>
+<% else %>
+<h1>Only the admin can edit and delete bicycles</h1>
+<%= link_to 'Back', bicycles_path %>
+<%end %>
+

@@ -1,0 +1,33 @@
+<% if !signed_in? %>
+		<h1>You must be logged on to visit this page</h1>
+		<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
+		<p>Already a member? <%= link_to "Sign in", login_path %></p>
+
+<% else %>
+	<p id="notice"><%= notice %></p>
+	<p>
+	<strong>Customer:</strong>
+	<%= @rent.customer.userName %>
+	</p>
+
+	<p>
+	<strong>Bicycle:</strong>
+	<%= @rent.bicycle.modelName %>
+	</p>
+
+	<p>
+	<strong>Number of days:</strong>
+	<%= @rent.numOfDays %>
+	</p>
+
+	<p>
+	<strong>Date of rent:</strong>
+	<%= @rent.dateOfRent %>
+	</p>
+
+<% if admin? %>
+	<%= link_to 'Edit', edit_rent_path(@rent) %> 
+	<%= link_to 'Destroy', @rent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+<%end%>
+	<%= link_to 'Back', rents_path %>
+<%end%>

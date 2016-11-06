@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  customer_id: 1
+  bicycle_id: 1
+  numOfDays: 1
+  dateOfRent: 2016-11-01
+
+two:
+  customer_id: 1
+  bicycle_id: 1
+  numOfDays: 1
+  dateOfRent: 2016-11-01

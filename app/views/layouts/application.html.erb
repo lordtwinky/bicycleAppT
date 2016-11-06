@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BicycleAppT</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div id="banner">
+	<%= image_tag("banner_bike.jpg", :size => "180x50") %>
+	<%= "Dublin Bicycles" %>
+</div>
+<div id="nav">
+	<ul>
+		<% if !signed_in? %>
+			<li><%=link_to "Home", root_path%></li>
+			<li><%= link_to "Sign in", login_path %></li>
+			<li><%=link_to "Sign up", new_customer_path %></li>
+			<li><%=link_to "Browse", bicycles_path%></li>
+		<% end %>
+		<% if admin? %>
+			<li>Administrator</li>
+			<li><%=link_to "Home", root_path%></li>
+			<li><%=link_to "Bicycles", bicycles_path%></li>
+			<li><%=link_to "Customers", customers_path%></li>
+			<li><%=link_to "Purchase", purchases_path%></li>
+			<li><%=link_to "Rent", rents_path%></li>
+			<li><%=link_to "Sign Out", logout_path %></li>
+		<% end %>
+		<% if !admin? and signed_in? %>
+			<li>Signed in as <%= @current_customer.userName %></li>
+			<li><%=link_to "Home", root_path%></li>
+			<li><%=link_to "Browse", bicycles_path%></li>
+			<li><%=link_to "Purchase", purchases_path%></li>
+			<li><%=link_to "Rent", rents_path%></li>
+			<li><%=link_to "Sign Out", logout_path %></li>
+		<%end %>
+	</ul>
+</div>
+<%= yield %>
+
+</body>
+</html>

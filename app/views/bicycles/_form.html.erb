@@ -1,0 +1,49 @@
+<%= form_for(@bicycle) do |f| %>
+  <% if @bicycle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@bicycle.errors.count, "error") %> prohibited this bicycle from being saved:</h2>
+
+      <ul>
+      <% @bicycle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :modelName, 'Model name' %><br>
+    <%= f.text_field :modelName %>
+  </div>
+  <div class="field">
+    <%= f.label :colour, 'Colour' %><br>
+    <%= f.text_field :colour %>
+  </div>
+  <div class="field">
+    <%= f.label :secondHand, 'Second hand?' %><br>
+    <%= f.check_box :secondHand %>
+  </div>
+  <div class="field">
+    <%= f.label :purchaseCost, 'Purchase cost' %><br>
+    <%= f.text_field :purchaseCost %>
+  </div>
+  <div class="field">
+    <%= f.label :rentCostDay, 'Rent cost per day' %><br>
+    <%= f.text_field :rentCostDay %>
+  </div>
+  <div class="field">
+    <%= f.label :frame, 'Frame' %><br>
+    <%= f.text_field :frame %>
+  </div>
+  <div class="field">
+    <%= f.label :typeOfBicycle, 'Type of bicycle' %><br>
+    <%= f.text_field :typeOfBicycle %>
+  </div>
+  <div class="field">
+    <%= f.label :image, 'Image' %><br>
+    <%= f.text_field :image %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

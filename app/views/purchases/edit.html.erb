@@ -1,0 +1,14 @@
+<% if admin? %>
+	<h1>Editing purchase</h1>
+	<%= render 'form' %>
+	<%= link_to 'Show', @purchase %> |
+	<%= link_to 'Back', purchases_path %>
+<% else if !signed_in? %>
+	<h1>You must be logged on to visit this page</h1>
+	<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
+	<p>Already a member? <%= link_to "Sign in", login_path %></p>
+<% else %> 
+	<h1> Only the admin is able to edit and destroy. </h1>
+	<%= link_to 'Back to your purchases', purchases_path %>
+<%end%>
+<%end%>

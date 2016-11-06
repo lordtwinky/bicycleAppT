@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Model name:</strong>
+  <%= @bicycle.modelName %>
+</p>
+
+<p>
+  <strong>Colour:</strong>
+  <%= @bicycle.colour %>
+</p>
+
+<p>
+  <strong>Second hand?:</strong>
+  <%= @bicycle.secondHand %>
+</p>
+
+<p>
+  <strong>Purchase cost:</strong>
+  <%= @bicycle.purchaseCost %>
+</p>
+
+<p>
+  <strong>Rent cost per day:</strong>
+  <%= @bicycle.rentCostDay %>
+</p>
+
+<p>
+  <strong>Frame:</strong>
+  <%= @bicycle.frame %>
+</p>
+
+<p>
+  <strong>Type of bicycle:</strong>
+  <%= @bicycle.typeOfBicycle %>
+</p>
+
+<p>
+  <strong>Image:</strong>
+  <%= image_tag(@bicycle.image, :alt => "Image not found", :size => "100x50") %>
+</p>
+
+<h2>Star Rating and comment:</h2>
+	<%= form_for([@bicycle, Comment.new]) do |f| %>
+		<h3><%=f.label :stars %>
+			<% stars = [1,2,3,4,5] %>
+			<% stars.each do |star| %>
+				<%= f.radio_button :stars, star %> <%= star %>
+			<% end %>
+		</h3></br>
+		<%= f.text_area :content, :rows => 4, :cols => 40 %>
+		<div class ="actions">
+			<%= f.submit "Post a Comment"%>
+		</div>
+	<% end %>
+	
+<% if @bicycle.comments.empty? %>
+	<h3>You are the first to comment </h3>
+<% else %>
+	<h2>What others felt about this:</h2>
+	<% @bicycle.comments.reverse.each do |comment| %>
+		<p><%= comment.content %>
+		Posted <%=time_ago_in_words(comment.created_at) %> ago by
+		<%=comment.customer.userName %></p>
+	<% end %>
+	<h3> Star Rating </h3>
+	<p>
+		<%= number_with_precision(@bicycle.average_stars, precision: 0) %>
+	</p>
+<% end %>
+<%= link_to 'Back', bicycles_path %>

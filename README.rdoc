@@ -1,27 +1,10 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This application allows users to create accounts which they can use to purchase and rent bicycles.
+Depending on who is using the website, certain privileges are given:
+-not logged in: allowed to browse bicycles (but not purchase rent, edit or destroy) and to create an account and log in
+-logged in: allowed to browse bicycles, and rent or purchase a bicycle for their account - not for anyone else. Not allowed to edit or destroy.
+-Admin: allowed to view, edit and destroy customers, purchases, rents, bicycles from the database - not allowed to make purchases or rents.
 
 
 Please feel free to use a different markup language if you do not plan to run

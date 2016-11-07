@@ -26,13 +26,13 @@
 	<%= f.collection_select :bicycle_id, Bicycle.all, :id, :modelName %>
   </div>
   <div class="field">
-    <%= f.label :numOfDays %><br>
+    <%= f.label :numOfDays, 'Number of days' %><br>
     <%= f.number_field :numOfDays %>
   </div>
   <div class="field">
-    <%= f.label :dateOfRent %><br>
+    <%= f.label :dateOfRent, 'Start of rent' %><br>
     <%= f.date_select :dateOfRent %>
-  </div>
+  </div>	
   <div class="actions">
     <%= f.submit %>
   </div>

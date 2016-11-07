@@ -2,43 +2,69 @@
 <html>
 <head>
 <title>BicycleAppT</title>
-	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<div id="banner">
+<div id="banner">	
 	<%= image_tag("banner_bike.jpg", :size => "180x50") %>
 	<%= "Dublin Bicycles" %>
 </div>
-<div id="nav">
-	<ul>
-		<% if !signed_in? %>
-			<li><%=link_to "Home", root_path%></li>
-			<li><%= link_to "Sign in", login_path %></li>
-			<li><%=link_to "Sign up", new_customer_path %></li>
-			<li><%=link_to "Browse", bicycles_path%></li>
+<% if !signed_in? %>	
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><%=link_to root_path, class: 'btn btn-success' do %>
+				<i class=" glyphicon glyphicon-home"></i> Home
+				<% end %>
+	  </li>
+	  <li><%= link_to "Sign in", login_path %></li>
+	  <li><%=link_to "Sign up", new_customer_path %></li>
+	  <li><%=link_to "Browse", bicycles_path%></li>
+    </ul>
+  </div>
+</nav>
+<% end %>
+
+<% if admin? %>
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">	
+    <ul class="nav navbar-nav">
+      <li><%=link_to "Administrator", customer_path(@current_customer)%></li>
+	  <li><%=link_to root_path, class: 'btn btn-success' do %>
+		<i class=" glyphicon glyphicon-home"></i> Home
 		<% end %>
-		<% if admin? %>
-			<li>Administrator</li>
-			<li><%=link_to "Home", root_path%></li>
-			<li><%=link_to "Bicycles", bicycles_path%></li>
-			<li><%=link_to "Customers", customers_path%></li>
-			<li><%=link_to "Purchase", purchases_path%></li>
-			<li><%=link_to "Rent", rents_path%></li>
-			<li><%=link_to "Sign Out", logout_path %></li>
+	  </li>
+	  <li><%=link_to "Bicycles", bicycles_path%></li>
+	  <li><%=link_to "Customers", customers_path%></li>
+	  <li><%=link_to "Purchase", purchases_path%></li>
+	  <li><%=link_to "Rent", rents_path%></li>
+	  <li><%=link_to "Sign Out", logout_path %></li>
+    </ul>
+  </div>
+</nav>
+<% end %>
+
+<% if !admin? and signed_in? %>
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <ul class="nav navbar-nav">
+      <li><%=link_to @current_customer.userName, customer_path(@current_customer)%></li>
+	  <li><%=link_to root_path, class: 'btn btn-success' do %>
+		<i class=" glyphicon glyphicon-home"></i> Home
 		<% end %>
-		<% if !admin? and signed_in? %>
-			<li>Signed in as <%= @current_customer.userName %></li>
-			<li><%=link_to "Home", root_path%></li>
-			<li><%=link_to "Browse", bicycles_path%></li>
-			<li><%=link_to "Purchase", purchases_path%></li>
-			<li><%=link_to "Rent", rents_path%></li>
-			<li><%=link_to "Sign Out", logout_path %></li>
-		<%end %>
-	</ul>
-</div>
+	  </li>
+	  <li><%=link_to "Browse", bicycles_path%></li>
+      <li><%=link_to "Purchase", purchases_path%></li>
+	  <li><%=link_to "Rent", rents_path%></li>
+	  <li><%=link_to "Sign Out", logout_path %></li>
+    </ul>
+  </div>
+</nav>
+
+<%end %>
 <%= yield %>
 
 </body>

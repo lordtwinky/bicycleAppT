@@ -1,18 +1,18 @@
 <%if admin? %>
-<table>
-  <thead>
+<h1>Listing all rents made by all customers</h1>
+<div class="table-responsive">
+<table class="table">
+  <thead class="thead-inverse">
     <tr>
-	  <th>Customer</th>
+      <th>Customer</th>
       <th>Bicycle</th>
       <th>Number of days</th>
       <th>Date of rent</th>
-      <th colspan="3"></th>
+	  <th>Finish date</th>
     </tr>
   </thead>
-
   <tbody>
-	<h1>Listing all rents made by all customers</h1>
-	<% if @rents.empty? %>
+    <% if @rents.empty? %>
 	No rents have been made in the database.
 	<%else %>
 		<% @rents.each do |rent| %>
@@ -21,49 +21,54 @@
 				<td><%= rent.bicycle.modelName %></td>
 				<td><%= rent.numOfDays %></td>
 				<td><%= rent.dateOfRent %></td>
+				<td><%= rent.dateOfRent + rent.numOfDays %></td>
 				<td><%= link_to 'Show', rent %></td>
 				<td><%= link_to 'Edit', edit_rent_path(rent) %></td>
 				<td><%= link_to 'Destroy', rent, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		<% end %>
-			</tr>
+		    </tr>
+		<% end %>	
 	<% end%>
-    <% end %>
   </tbody>
 </table>
+</div>	
+<% end %>
 
-<% else if signed_in? and !admin?%>
-<table>
-  <thead>
+<% if signed_in? and !admin?%>
+<h1>Listing rents made by: <%= @current_customer.userName %></h1>
+<div class="table-responsive">
+<table class="table">
+  <thead class="thead-inverse">
     <tr>
       <th>Bicycle</th>
-	  <th>Number of days</th>
+      <th>Number of days</th>
       <th>Date of rent</th>
-      <th colspan="3"></th>
+	  <th>Total cost</th>
+	  <th>Finish date</th>
     </tr>
   </thead>
-
   <tbody>
-	<h1>Listing rents made by: <%= @current_customer.userName %></h1>
-    <% @rents.each do |rent| %>
-      <tr>
-		<% if rent.customer_id == @current_customer.id %>
-			<td><%= rent.bicycle.modelName %></td>
-			<td><%= rent.numOfDays %></td>
-			<td><%= rent.dateOfRent %></td>
-			<td><%= link_to 'Show', rent %></td>
-		<% end %>
-      </tr>
-    <% end %>
+		<% @rents.each do |rent| %>
+			<tr>
+				<% if rent.customer_id == @current_customer.id %>
+					<td><%= rent.bicycle.modelName %></td>
+					<td><%= rent.numOfDays %></td>
+					<td><%= rent.dateOfRent %></td>
+					<td><%= float_euro(rent.numOfDays * rent.bicycle.rentCostDay) %></td>
+					<td><%= rent.dateOfRent + rent.numOfDays %></td>	
+					<td><%= link_to 'Show', rent %></td>
+				<% end %>
+			</tr>
+		<% end%>
   </tbody>
 </table>
+</div>
+<%= link_to new_rent_path, class: 'btn btn-success' do%>
+<i class="glyphicon glyphicon-plus"></i> New Rent
+<% end %>	
+<% end %>
 
-<br>
-
-<%= link_to 'New Rent', new_rent_path %>
-
-<% else if !signed_in? and !admin? %>
+<% if !signed_in? and !admin? %>
 		<h1>You must be logged on to visit this page</h1>
 		<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
 		<p>Already a member? <%= link_to "Sign in", login_path %></p>
-<%end%>
 <%end%>

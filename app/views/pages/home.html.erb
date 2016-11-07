@@ -4,7 +4,78 @@
 <h1>Welcome to Dublin Bicycles, <%= @current_customer.userName %></h1>
 <% else %>
 <h1>Welcome to Dublin Bicycles</h1>
-	<p>New user? <%=link_to "Sign up now!", new_customer_path %></p>
 <%end %>
 <%end%>
+Dublin Bicycles is a website that allows users to browse, purchase and rent bicycles.
+<br>
+The access and privileges of the website are determined by what type of user is using it. ('Customer', 'Admin' or 'not logged on')
+<br>
+<div class="table-responsive">
+		<table class="table">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Customer</th>
+				</tr>
+			</thead>
+			<tbody>
+					<td>
+					<li>Edit your own profile details </li>
+					<li>Browse and comment on bicycles</li>
+					<li>Purchase and rent bicycles</li>
+					</td>
+			</tbody>
+		</table>	
+</div>
+<div class="table-responsive">
+		<table class="table">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Administrator</th>
+				</tr>
+			</thead>
+			<tbody>
+					<td>
+					<li>View all customers and able to create, edit or destroy any customer records</li>
+					<li>View all bicycles and able to create, edit or destroy any bicycle records</li>
+					<li>View all purchases and able to edit or destroy any purchase records</li>
+					<li>View all rents and able to edit or destroy any rent records</li>
+					<li>Note: not allowed to create purchases or rents under admin</li>
+					</td>
+			</tbody>
+		</table>	
+</div>
+<div class="table-responsive">
+		<table class="table">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Not logged in</th>
+				</tr>
+			</thead>
+			<tbody>
+					<td>
+					<li>Browse bicycles, but not able to comment or rate them</li>
+					</td>
+			</tbody>
+		</table>	
+</div>
+<div class="table-responsive">
+		<table class="table">
+			<thead class="thead-inverse">
+				<tr>
+					<th>Features everyone has access to</th>
+				</tr>
+			</thead>
+			<tbody>
+					<td>
+					<li>Create an account</li>
+					<li>Log in</li>
+					<li>Home page</li>
+					</td>
+			</tbody>
+		</table>	
+</div>
+
+
+<h4>Website created by Alexander Cliffe</h4>
+<h4>Github link: <a href="https://github.com/lordtwinky/bicycleAppT"> https://github.com/lordtwinky/bicycleAppT </a></h4>
 

@@ -1,7 +1,7 @@
-<h1>Listing bicycles</h1>
-
-<table>
-  <thead>
+<h1>Listing available bicycles</h1>
+<div class="table-responsive">
+<table class="table">
+  <thead class="thead-inverse">
     <tr>
       <th>Model name</th>
       <th>Colour</th>
@@ -11,18 +11,16 @@
       <th>Frame</th>
       <th>Type of 	bicycle</th>
       <th>Image</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
-
   <tbody>
-    <% @bicycles.each do |bicycle| %>
+      <% @bicycles.each do |bicycle| %>
       <tr>
         <td><%= bicycle.modelName %></td>
         <td><%= bicycle.colour %></td>
-        <td><%= bicycle.secondHand %></td>
-        <td><%= bicycle.purchaseCost %></td>
-        <td><%= bicycle.rentCostDay %></td>
+		<td><%= yesOrNo_boolean(bicycle.secondHand) %></td>
+        <td><%= float_euro(bicycle.purchaseCost) %></td>
+        <td><%= float_euro(bicycle.rentCostDay) %></td>
         <td><%= bicycle.frame %></td>
         <td><%= bicycle.typeOfBicycle %></td>
         <td><%= image_tag(bicycle.image, :alt => "Image not found", :size => "100x50") %></td>
@@ -37,8 +35,9 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
+</div> 
 <% if admin? %>
-<%= link_to 'New Bicycle', new_bicycle_path %>
+<%= link_to new_bicycle_path, class: 'btn btn-success' do%>
+<i class="glyphicon glyphicon-plus"></i> New Bicycle
+<% end %>
 <% end %>

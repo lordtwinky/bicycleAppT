@@ -21,4 +21,15 @@ end
   #admin's password is 'admin'
 end
 
-	
+def yesOrNo_boolean(boolean)
+    boolean ? 'Yes' : 'No'
+end
+
+def float_euro(number)
+	number_to_currency(number,:unit=>'€')
+end
+
+def age(dob)
+  now = Time.now.utc.to_date
+  now.year - dob.year - ((now.month > dob.month || (now.month == dob.month && now.day >= dob.day)) ? 0 : 1)
+end

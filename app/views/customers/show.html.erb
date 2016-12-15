@@ -26,12 +26,24 @@
   <strong>Address:</strong>
   <%= @customer.address %>
 </p>
+<p>
 
 <p>
   <strong>Email:</strong>
   <%= @customer.email %>
 </p>
 
+<p>
+  <strong>Avatar:</strong>
+  <%= image_tag(@customer.attachment_url, :alt => "Image not found", :size => "100x50") %>
+</p>
+<p>
+Distance from our store in Dublin: <% @customer.distance_to("1 Grove Lawn, Blackrock, Co. Dublin")%>
+</p>
+<p>
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@customer.latitude},#{@customer.longitude}&markers=#{@customer.latitude},#{@customer.longitude}&zoom=7&size=640x400&key=AIzaSyA4BHW3txEdqfxzdTlPwaHsYRSZbfeIcd8",
+              class: 'img-fluid img-rounded'%>
+</p>
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>
 

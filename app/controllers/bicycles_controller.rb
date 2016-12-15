@@ -6,7 +6,31 @@ class BicyclesController < ApplicationController
   def index
     @bicycles = Bicycle.all
   end
-
+ 
+  def search
+		@bicycles = Bicycle.search params[:query]
+		unless @bicycles.empty?
+			render 'index'
+		else
+			flash[:notice] =  'No record matches that search' 
+			render 'index'   
+		end
+  end
+  
+  def discount
+  
+  end
+  
+  def apply_discount
+	discount = params[:discount].to_f
+	@bicycles = Bicycle.all
+	@bicycles.each do |m|
+		m.apply_discount(m, discount)
+		m.save
+	end
+	render 'index', notice: "Discount of 10% has been applied"
+  end
+  
   # GET /bicycles/1
   # GET /bicycles/1.json
   def show
@@ -71,4 +95,5 @@ class BicyclesController < ApplicationController
     def bicycle_params
       params.require(:bicycle).permit(:modelName, :colour, :secondHand, :purchaseCost, :rentCostDay, :frame, :typeOfBicycle, :image)
     end
+	
 end

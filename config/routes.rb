@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :search_suggestions
+
   resources :comments
 
   controller :sessions do
@@ -12,6 +14,14 @@ Rails.application.routes.draw do
   get 'pages/home'
 
   get 'pages/about'
+  
+  get 'tour',	 :to=>'customers#tour'
+  
+  get 'search',	 :to=>'bicycles#search'
+  
+  get 'discount', :to=>'bicycles#discount'
+  
+  get 'apply_discount', :to=> 'bicycles#apply_discount'
 
   resources :rents
 

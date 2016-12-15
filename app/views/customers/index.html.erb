@@ -9,6 +9,7 @@
       <th>Date of birth</th>
       <th>Address</th>
       <th>Email</th>
+	  <th>Avatar</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
         <td><%= customer.dob %></td>
         <td><%= customer.address %></td>
         <td><%= customer.email %></td>
+		<td><%= image_tag(customer.attachment_url, :alt => "Image not found", :size => "50x50") %></td>
         <td><%= link_to 'Show', customer %></td>
         <td><%= link_to 'Edit', edit_customer_path(customer) %></td>
         <td><%= link_to 'Destroy', customer, method: :delete, data: { confirm: 'Are you sure?' } %></td>

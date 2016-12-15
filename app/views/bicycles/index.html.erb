@@ -1,4 +1,8 @@
 <h1>Listing available bicycles</h1>
+<div id="search">
+	Search for model name or type: <%= render 'search' %>
+</div>
+
 <div class="table-responsive">
 <table class="table">
   <thead class="thead-inverse">
@@ -37,7 +41,9 @@
 </table>
 </div> 
 <% if admin? %>
+<%= button_to 'Apply a discount', discount_path, method:  :get %>
 <%= link_to new_bicycle_path, class: 'btn btn-success' do%>
 <i class="glyphicon glyphicon-plus"></i> New Bicycle
+
 <% end %>
 <% end %>

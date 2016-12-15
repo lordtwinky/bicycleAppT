@@ -30,6 +30,7 @@ class CustomersController < ApplicationController
       if @customer.save
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
+		Customermailer.welcome(@customer).deliver
       else
         format.html { render :new }
         format.json { render json: @customer.errors, status: :unprocessable_entity }
@@ -43,7 +44,7 @@ class CustomersController < ApplicationController
     respond_to do |format|
       if @customer.update(customer_params)
         format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @customer }
+        format.json { ren der :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
         format.json { render json: @customer.errors, status: :unprocessable_entity }
@@ -69,6 +70,6 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:userName, :phoneNum, :dob, :address, :email, :password, :password_confirmation)
+      params.require(:customer).permit(:userName, :phoneNum, :dob, :address, :email, :password, :password_confirmation, :latitude, :longitude, :attachment)
     end
 end

@@ -1,4 +1,5 @@
 class Customer < ActiveRecord::Base
+	mount_uploader :attachment, AttachmentUploader
 	has_many :purchases, dependent: :destroy
 	has_many :rents, dependent: :destroy
 	has_many :comments
@@ -13,5 +14,7 @@ class Customer < ActiveRecord::Base
 	validates :address, presence: true
 	validates :email, presence: true
 	validates :password_digest, presence: true
-
+	geocoded_by :address
+	after_validation :geocode, :if => :address_changed?
+	
 end
